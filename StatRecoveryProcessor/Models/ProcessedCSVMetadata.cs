@@ -7,6 +7,43 @@ using CsvHelper.Configuration;
 
 namespace StatRecoveryProcessor.Models;
 
+public class ProcessedCSVMetadata
+{
+    public string Id { get; set; } = string.Empty;
+    public string ClaimNumber { get; set; } = string.Empty;
+    public DateTime? ClaimDate { get; set; }
+    public decimal OpenAmount { get; set; }
+    public decimal OriginalAmount { get; set; }
+    public string Status { get; set; } = string.Empty;
+    public string CustomerName { get; set; } = string.Empty;
+    public string ARReasonCode { get; set; } = string.Empty;
+    public string CustomerReasonCode { get; set; } = string.Empty;
+    public List<string> AttachmentList { get; set; } = new();
+    public string CheckNumber { get; set; } = string.Empty;
+    public DateTime? CheckDate { get; set; }
+    public string Comments { get; set; } = string.Empty;
+    public int DaysOutstanding { get; set; }
+    public string Division { get; set; } = string.Empty;
+    public string PONumber { get; set; } = string.Empty;
+    public string Brand { get; set; } = string.Empty;
+    public string MergeStatus { get; set; } = string.Empty;
+    public decimal UnresolvedAmount { get; set; }
+    public string DocumentType { get; set; } = string.Empty;
+    public DateTime? DocumentDate { get; set; }
+    public string OriginalCustomer { get; set; } = string.Empty;
+    public string Location { get; set; } = string.Empty;
+    public string CustomerLocation { get; set; } = string.Empty;
+    public DateTime? CreateDate { get; set; }
+    public string LoadId { get; set; } = string.Empty;
+    public string CarrierName { get; set; } = string.Empty;
+    public string InvoiceStoreNumber { get; set; } = string.Empty;
+
+    public override string ToString()
+    {
+        return $"Claim: {ClaimNumber}, ClaimDate: {ClaimDate} PO: {PONumber}, Attachments: {string.Join(", ", AttachmentList)}";
+    }
+}
+
 public class ProcessedCSVMetadataMap : ClassMap<ProcessedCSVMetadata>
 {
     public ProcessedCSVMetadataMap()
@@ -57,42 +94,5 @@ public class AttachmentListConverter : DefaultTypeConverter
         if (value is List<string> list)
             return string.Join(",", list);
         return string.Empty;
-    }
-}
-
-public class ProcessedCSVMetadata
-{
-    public string Id { get; set; } = string.Empty;
-    public string ClaimNumber { get; set; } = string.Empty;
-    public DateTime? ClaimDate { get; set; }
-    public decimal OpenAmount { get; set; }
-    public decimal OriginalAmount { get; set; }
-    public string Status { get; set; } = string.Empty;
-    public string CustomerName { get; set; } = string.Empty;
-    public string ARReasonCode { get; set; } = string.Empty;
-    public string CustomerReasonCode { get; set; } = string.Empty;
-    public List<string> AttachmentList { get; set; } = new();
-    public string CheckNumber { get; set; } = string.Empty;
-    public DateTime? CheckDate { get; set; }
-    public string Comments { get; set; } = string.Empty;
-    public int DaysOutstanding { get; set; }
-    public string Division { get; set; } = string.Empty;
-    public string PONumber { get; set; } = string.Empty;
-    public string Brand { get; set; } = string.Empty;
-    public string MergeStatus { get; set; } = string.Empty;
-    public decimal UnresolvedAmount { get; set; }
-    public string DocumentType { get; set; } = string.Empty;
-    public DateTime? DocumentDate { get; set; }
-    public string OriginalCustomer { get; set; } = string.Empty;
-    public string Location { get; set; } = string.Empty;
-    public string CustomerLocation { get; set; } = string.Empty;
-    public DateTime? CreateDate { get; set; }
-    public string LoadId { get; set; } = string.Empty;
-    public string CarrierName { get; set; } = string.Empty;
-    public string InvoiceStoreNumber { get; set; } = string.Empty;
-
-    public override string ToString()
-    {
-        return $"Claim: {ClaimNumber}, ClaimDate: {ClaimDate} PO: {PONumber}, Attachments: {string.Join(", ", AttachmentList)}";
     }
 }
